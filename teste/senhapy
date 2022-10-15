@@ -1,0 +1,7 @@
+ 
+senha1 = '0000'
+
+with open('docs/TXT/senha.txt','w') as senha:
+    senha.write(senha1)
+
+senha.close() 
