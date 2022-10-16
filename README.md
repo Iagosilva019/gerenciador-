@@ -25,9 +25,17 @@ Gerenciador de sites/senhas em Python
   - Alterar permissão
   
 # Capturas de Tela:
+  <h3>Tela: Alterar/Entrar<h3>
+
+   ![Captura de tela de 2022-10-15 22-40-26](https://user-images.githubusercontent.com/92806149/196013890-3e2591c8-7cbc-4ad4-b1f6-65d203c13701.png)
+
+  <h3>Tela: Menu Principal<h3>
+      
+   ![Captura de tela de 2022-10-15 22-42-37](https://user-images.githubusercontent.com/92806149/196013943-6f724750-8197-4179-b0e2-1c5961a8676a.png)
+
   
   
-# Contato:
+# Contatos:
    <div align="center> 
 
   <a href="https://instagram.com/_.iago3._" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a>
