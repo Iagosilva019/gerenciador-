@@ -35,7 +35,7 @@ Gerenciador de sites/senhas em Python
 
   
   
-# Contatos:
+# Contato:
    <div align="center> 
 
   <a href="https://instagram.com/_.iago3._" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a>
