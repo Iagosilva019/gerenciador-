@@ -1,6 +1,7 @@
 #Toolname   : Gerenciador
 #Author     : Iago-Linux
 #Version    : 1.0
+#update version: 2.0 21/09/2023
 #License    : ....
 #Copyright  : ....
 #Github     : https://github.com/Iagosilva019
@@ -18,6 +19,10 @@
 import abc
 import os
 import sys
+from time import sleep
+from random import choice
+from docs.CLASSES.colors import Cores
+from docs.CLASSES.Login import Login
 
 
  #--------------------------------------------------------------
@@ -91,7 +96,6 @@ class Gerenciador(abc.ABC):
           sites.writelines(self._sites)
         sites.close() #fechamento de um arquivo
         
-        
     #-------------------------------------------------------------
     def buscar(self, site):
         with open("docs/TXT/dados.txt", "r") as arquivo: #abertura o arquivo
@@ -122,6 +126,7 @@ class Gerenciador(abc.ABC):
      #-------------------------------------------------------------
      
     def gdrive(self , OP):
+        try:
           if OP == '1':
             os.system('cat docs/TXT/dados.txt > docs/TXT/gdrive/dados.txt')
             print('Backup salvo no google drive')
@@ -132,6 +137,9 @@ class Gerenciador(abc.ABC):
             os.system("bash drive.sh")
             sleep(2.0)
             exit()
+        except:
+          os.system("bash drive.sh")
+            
             
     #-------------------------------------------------------------
     @abc.abstractmethod
@@ -166,33 +174,26 @@ class Metodos_Abstratos(Gerenciador):
 
 #main-------------------------------------------------------------------------------
 
-
-
-if __name__ == "__main__":
-    from random import choice
-    from time import sleep
-
-    from docs.CLASSES.colors import Cores
-    from docs.CLASSES.Login import Login
-    GE =  Metodos_Abstratos('','','','')
-    L  = Login('')
-    C  = Cores()
+class Main():
+    ge =  Metodos_Abstratos('','','','')
+    login  = Login('')
+    colors  = Cores()
     
 #-------------------------------------------------------------
 
-    logo = f'''{choice(C.listColor)}╭━━━╮╭━━━╮╭━━━╮╭━━━╮╭━╮╱╭╮╭━━━╮╭━━╮╭━━━╮╭━━━╮╭━━━╮╭━━━╮
-{choice(C.listColor)}┃╭━╮┃┃╭━━╯┃╭━╮┃┃╭━━╯┃┃╰╮┃┃┃╭━╮┃╰┫┣╯┃╭━╮┃╰╮╭╮┃┃╭━╮┃┃╭━╮┃
-{choice(C.listColor)}┃┃╱╰╯┃╰━━╮┃╰━╯┃┃╰━━╮┃╭╮╰╯┃┃┃╱╰╯╱┃┃╱┃┃╱┃┃╱┃┃┃┃┃┃╱┃┃┃╰━╯┃
-{choice(C.listColor)}┃┃╭━╮┃╭━━╯┃╭╮╭╯┃╭━━╯┃┃╰╮┃┃┃┃╱╭╮╱┃┃╱┃╰━╯┃╱┃┃┃┃┃┃╱┃┃┃╭╮╭╯
-{choice(C.listColor)}┃╰┻━┃┃╰━━╮┃┃┃╰╮┃╰━━╮┃┃╱┃┃┃┃╰━╯┃╭┫┣╮┃╭━╮┃╭╯╰╯┃┃╰━╯┃┃┃┃╰╮
-{choice(C.listColor)}╰━━━╯╰━━━╯╰╯╰━╯╰━━━╯╰╯╱╰━╯╰━━━╯╰━━╯╰╯╱╰╯╰━━━╯╰━━━╯╰╯╰━╯
-{choice(C.listColor)}╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱
-{choice(C.listColor)}╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱
-           {choice(C.listColor)}V1.0                           Iago-Linux'''
+    logo = f'''{choice(colors.listColor)}╭━━━╮╭━━━╮╭━━━╮╭━━━╮╭━╮╱╭╮╭━━━╮╭━━╮╭━━━╮╭━━━╮╭━━━╮╭━━━╮
+{choice(colors.listColor)}┃╭━╮┃┃╭━━╯┃╭━╮┃┃╭━━╯┃┃╰╮┃┃┃╭━╮┃╰┫┣╯┃╭━╮┃╰╮╭╮┃┃╭━╮┃┃╭━╮┃
+{choice(colors.listColor)}┃┃╱╰╯┃╰━━╮┃╰━╯┃┃╰━━╮┃╭╮╰╯┃┃┃╱╰╯╱┃┃╱┃┃╱┃┃╱┃┃┃┃┃┃╱┃┃┃╰━╯┃
+{choice(colors.listColor)}┃┃╭━╮┃╭━━╯┃╭╮╭╯┃╭━━╯┃┃╰╮┃┃┃┃╱╭╮╱┃┃╱┃╰━╯┃╱┃┃┃┃┃┃╱┃┃┃╭╮╭╯
+{choice(colors.listColor)}┃╰┻━┃┃╰━━╮┃┃┃╰╮┃╰━━╮┃┃╱┃┃┃┃╰━╯┃╭┫┣╮┃╭━╮┃╭╯╰╯┃┃╰━╯┃┃┃┃╰╮
+{choice(colors.listColor)}╰━━━╯╰━━━╯╰╯╰━╯╰━━━╯╰╯╱╰━╯╰━━━╯╰━━╯╰╯╱╰╯╰━━━╯╰━━━╯╰╯╰━╯
+{choice(colors.listColor)}╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱
+{choice(colors.listColor)}╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱
+           {choice(colors.listColor)}V1.0                           Iago-Linux'''
 
 #-------------------------------------------------------------
-    print('\nSenha: 0000')
-    print( choice(C.listColor))
+    #print('\nSenha: 0000')
+    print( choice(colors.listColor))
     sprint('|================================================|')
     sprint('|                  GERENCIADOR 1.0               |')
     sprint('|================================================|')
@@ -201,35 +202,35 @@ if __name__ == "__main__":
     sprint(' ================================================')
 #-------------------------------------------------------------
 
-    try:    #tratamento de erros
-     ss  = input(f'{C.code_result}{choice(C.listColor)}Deseja entrar ou alterar senha:{C.C} ')  
-     if ss == '1':   #Alterar senha ou entrar
-
+    try:#tratamento de erros
+     option_login  = input(f'{colors.code_result}{choice(colors.listColor)}Deseja alterar a senha ou entrar no gerenciador:{colors.C} ')  
+     if option_login == '1':   #Alterar senha
         with open('docs/TXT/senha.txt','r+') as senha:  #abertura o arquivo
-
           passs = senha.read()
-          Pass1 = input(f'{C.code_result}{choice(C.listColor)}Digite sua senha antiga:{C.C} ')
-          if Pass1 in passs:
-            novasenha = input(f'{C.code_result}{choice(C.listColor)}Digite sua nova senha:{C.C} ')
-            print(f'{C.code_info}{choice(C.listColor)}Senha alterada com sucesso')
+          Pass1 = input(f'{colors.code_result}{choice(colors.listColor)}Digite sua senha antiga:{colors.C} ')
+      
+          if Pass1 == passs:
+            novasenha = input(f'{colors.code_result}{choice(colors.listColor)}Digite sua nova senha:{colors.C} ')
+            print(f'{colors.code_info}{choice(colors.listColor)}Senha alterada com sucesso')
             sleep(2.0)
             clear()
-            L  = Login(novasenha)
-            L.alterar()
+            new_pass = Login('')
+            new_pass.alterar(novasenha)
+            exit()
           else:
-              sprint(f'\n{C.code_error}Senha não confere')
-              sleep(2.0)
-              exit()
-        senha.close()     #fechamento de um arquivo
-
-
-     elif ss == '2':   #Entrar no Gerenciador
-       senha = input(f'{C.code_result}{choice(C.listColor)}Digite sua senha:')
-       L.entrar(senha)
+            sprint(f'\n{colors.code_error}Senha não confere')
+            sleep(2.0)
+        senha.close()#fechamento de um arquivo
+        exit()
+       
+        
+     elif option_login == '2':   #Entrar no Gerenciador
+       senha = input(f'{colors.code_result}{choice(colors.listColor)}Digite sua senha:')
+       login.entrar(password=senha)
        sleep(2.0)
        clear()
      else:
-        sprint('Escolha uma opcao')
+        sprint('Escolha opcão 1 ou 2')
         exit()
     except:   #tratamento de erros
         print('key-force-exit or error')
@@ -253,24 +254,24 @@ if __name__ == "__main__":
 
     try:  #tratamento de erros
       while True:
-        op = input(f'{C.code_result}{choice(C.listColor)}O que deseja fazer:{C.C}')
+        op = input(f'{colors.code_result}{choice(colors.listColor)}O que deseja fazer:{colors.C}')
         if op == '1':
-          site   = input(f'\n{C.code_result}Digite o site:')
-          emaill = input(f'{C.code_result}Digite o email:')
-          senha  = input(f'{C.code_result}Digite a senha:')
-          url    = input(f'{C.code_result}Digite a url:')
-          GE     = Metodos_Abstratos(site,emaill,senha,url)
-          GE.Incluir()
+          site   = input(f'\n{colors.code_result}Digite o site:')
+          emaill = input(f'{colors.code_result}Digite o email:')
+          senha  = input(f'{colors.code_result}Digite a senha:')
+          url    = input(f'{colors.code_result}Digite a url:')
+          ge     = Metodos_Abstratos(site,emaill,senha,url)
+          ge.Incluir()
           
 #-------------------------------------------------------------
     #Mostrar Dados no Gerenciador
         elif op == '2':
-            print(choice(C.listColor))
-            sprint(f'---------------------------------------------------------------------------{C.C}')
-            print(choice(C.listColor))
-            GE.listar()
-            print(choice(C.listColor))
-            sprint(f'---------------------------------------------------------------------------{C.C}')
+            print(choice(colors.listColor))
+            sprint(f'---------------------------------------------------------------------------{colors.C}')
+            print(choice(colors.listColor))
+            ge.listar()
+            print(choice(colors.listColor))
+            sprint(f'---------------------------------------------------------------------------{colors.C}')
             
 #-------------------------------------------------------------
    #Buscar no Gerenciador
@@ -282,8 +283,8 @@ if __name__ == "__main__":
               print('\n',site)
               print('--------------------')
             sites.close() #fechamento de um arquivo
-            siteB = input(f'{C.code_result}{choice(C.listColor)}qual site deseja ver as informações:{C.C}')
-            GE.buscar(siteB)
+            siteB = input(f'{colors.code_result}{choice(colors.listColor)}qual site deseja ver as informações:{colors.C}')
+            ge.buscar(siteB)
             
 #-------------------------------------------------------------
     #Remover do Gerenciador
@@ -295,31 +296,31 @@ if __name__ == "__main__":
               print('\n',site)
               print('--------------------')
             sites.close() #fechamento de um arquivo
-            R = input(f'{C.code_result}{choice(C.listColor)}qual site deseja remover:{C.C}')
-            GE.Remover(R)
+            R = input(f'{colors.code_result}{choice(colors.listColor)}qual site deseja remover:{colors.C}')
+            ge.Remover(R)
             
 #-------------------------------------------------------------
     #Fazer Backup
         elif op == '5':
-            GE.backuplocal()
+            ge.backuplocal()
             print('\nBackup criado com sucesso!')
             
 #-------------------------------------------------------------
         elif op == '6':
             print('1 - Fazer backup\n2 - Instalar as depedencias')
             OP = input('Escolha uma opção:')
-            GE.gdrive(OP)
+            ge.gdrive(OP)
           
 #-------------------------------------------------------------
         elif op == '7':
-          GE.abrir_local()
+          ge.abrir_local()
           print('Pasta aberta')
           
 #-------------------------------------------------------------
         elif op == '8':
           print('1 - Permitir acesso a pasta\n2 - não permitir acesso a pasta')
           T = input('escolha uma opção:')
-          GE.permissao(T)
+          ge.permissao(T)
           
 #-------------------------------------------------------------
         elif op == '9':
@@ -327,7 +328,22 @@ if __name__ == "__main__":
             sleep(2.0)
             clear()
             exit()
+        elif op == 'list':
+          print('\n[1] - Incluir no Gerenciador')
+          print('[2] - Mostrar Dados no Gerenciador')
+          print('[3] - Buscar no Gerenciador')
+          print('[4] - Remover do Gerenciador')
+          print('[5] - Salvar um backup local')
+          print('[6] - Backup no google drive/Instalar depedencias')
+          print('[7] - Abrir pasta dos arquivos local')
+          print('[8] - Alterar permissão de acesso a pasta')
+          print('[9] - sair')
+
     except:    #tratamento de erros
         print('key-force-exit or error')
         exit()
       
+  
+
+if __name__ == "__main__":
+    Main()
